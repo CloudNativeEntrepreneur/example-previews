@@ -1,0 +1,27 @@
+---
+# Source: mychart/templates/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-ui-preview-pr-53
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: example-previews
+  source:
+    path: helm
+    repoURL: https://github.com/cloudnativeentrepreneur/sveltekit-web3auth-template.git
+    targetRevision: pr-53
+    helm:
+      version: v3
+      values: |
+        image:
+          tag: pr-53
+  destination:
+    namespace: example-ui-preview-pr-53
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
