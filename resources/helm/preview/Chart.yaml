@@ -1,0 +1,4 @@
+apiVersion: v1
+description: Preview environment resources
+name: example-preview-env-resources
+version: "0.1.0"

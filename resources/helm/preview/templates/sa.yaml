@@ -1,0 +1,10 @@
+
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: default
+  namespace: {{ .Release.Namespace }}
+{{- if .Values.imagePullSecrets }}
+imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 2 }}
+{{- end }}
