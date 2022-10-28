@@ -42,6 +42,8 @@ spec:
       values: |
         image:
           tag: pr-53
+        env:
+          DEBUG: sveltekit-web3auth:*
   destination:
     namespace: example-ui-preview-pr-53
     server: https://kubernetes.default.svc
