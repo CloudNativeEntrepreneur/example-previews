@@ -41,11 +41,11 @@ spec:
       version: v3
       values: |
         image:
-          tag: pr-53-03c28fb85742982df2a2c194caf7da500273c38a
+          tag: pr-53-606827a061cafd3583b011756f0c1fb1ebe80047
         env:
           DEBUG: sveltekit-web3auth:*
   destination:
-    namespace: example-ui-pr-53
+    namespace: example-ui-pr-53-preview
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
