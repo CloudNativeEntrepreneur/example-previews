@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: example-ui-preview-pr-pr-53-resources
+  name: example-ui-pr-53-resources
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -16,7 +16,7 @@ spec:
     helm:
       version: v3
   destination:
-    namespace: example-ui-preview-pr-pr-53
+    namespace: example-ui-pr-53
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
@@ -27,7 +27,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: example-ui-preview-pr-53
+  name: example-ui-pr-53
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -45,7 +45,7 @@ spec:
         env:
           DEBUG: sveltekit-web3auth:*
   destination:
-    namespace: example-ui-preview-pr-53
+    namespace: example-ui-pr-53
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
