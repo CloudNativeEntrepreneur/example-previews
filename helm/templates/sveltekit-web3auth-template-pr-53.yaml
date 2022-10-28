@@ -41,7 +41,7 @@ spec:
       version: v3
       values: |
         image:
-          tag: pr-53-0f740ef04f1563cf7ed3e263e19ea5726ef977ac
+          tag: pr-53-03c28fb85742982df2a2c194caf7da500273c38a
         env:
           DEBUG: sveltekit-web3auth:*
   destination:
