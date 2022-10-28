@@ -16,7 +16,7 @@ spec:
     helm:
       version: v3
   destination:
-    namespace: example-ui-pr-53
+    namespace: example-ui-pr-53-preview
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
@@ -41,7 +41,7 @@ spec:
       version: v3
       values: |
         image:
-          tag: pr-53-606827a061cafd3583b011756f0c1fb1ebe80047
+          tag: pr-53-9cfcad7d9b040a4ceb288d371121230c264b6183
         env:
           DEBUG: sveltekit-web3auth:*
   destination:
