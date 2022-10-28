@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: example-ui-pr-53-resources
+  name: example-ui-pr-53-preview-resources
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -27,7 +27,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: example-ui-pr-53
+  name: example-ui-pr-53-preview
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -41,7 +41,7 @@ spec:
       version: v3
       values: |
         image:
-          tag: pr-53-9cfcad7d9b040a4ceb288d371121230c264b6183
+          tag: pr-53-58430780b6767472c86272d7d07d2989525a48dc
         env:
           DEBUG: sveltekit-web3auth:*
   destination:
