@@ -1,5 +1,11 @@
 ---
 # Source: mychart/templates/preview.yaml
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: test-pr-1-preview
+---
+# Source: mychart/templates/preview.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
