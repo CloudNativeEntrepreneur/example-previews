@@ -7,6 +7,8 @@ metadata:
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   project: example-preview-envs
   source:
@@ -17,7 +19,7 @@ spec:
       version: v3
       values: |
         image:
-          tag: pr-72-2f293a64657230f30a484e74c56573c6ed2fad58
+          tag: pr-72-b8ca46d546925ba5bc2037836bf97e3d971ab01e
   destination:
     namespace: example-todo-model-service-pr-72-preview
     server: https://kubernetes.default.svc
@@ -60,6 +62,8 @@ metadata:
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   project: example-preview-envs
   source:
