@@ -1,0 +1,53 @@
+---
+# Source: example-todo-model-service-preview/templates/app.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-todo-model-service-pr-72-preview-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: example-preview-envs
+  source:
+    path: helm
+    repoURL: https://github.com/cloudnativeentrepreneur/example-todo-model-service.git
+    targetRevision: feat/preview
+    helm:
+      version: v3
+      values: |
+        image:
+          tag: pr-72-08153e9e82a0666a7cfc353f0ebb3bdcf20c7c1a
+  destination:
+    namespace: example-todo-model-service-pr-72-preview
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+---
+# Source: example-todo-model-service-preview/templates/environment.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-todo-model-service-pr-72-preview-environment
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: example-preview-envs
+  source:
+    path: helm
+    repoURL: https://github.com/cloudnativeentrepreneur/environment.git
+    targetRevision: v0.2.0
+    helm:
+      version: v3
+  destination:
+    namespace: example-todo-model-service-pr-72-preview
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
