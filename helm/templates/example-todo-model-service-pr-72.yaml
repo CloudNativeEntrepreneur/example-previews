@@ -17,7 +17,7 @@ spec:
       version: v3
       values: |
         image:
-          tag: pr-72-9f78f04b3b20e6d1a0f8afe10776acc29add8418
+          tag: pr-72-2f293a64657230f30a484e74c56573c6ed2fad58
   destination:
     namespace: example-todo-model-service-pr-72-preview
     server: https://kubernetes.default.svc
@@ -42,6 +42,30 @@ spec:
     path: helm
     repoURL: https://github.com/cloudnativeentrepreneur/environment.git
     targetRevision: v0.2.0
+    helm:
+      version: v3
+  destination:
+    namespace: example-todo-model-service-pr-72-preview
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+---
+# Source: example-todo-model-service-preview/templates/sourced-db.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-todo-model-service-pr-72-preview-sourced-db
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: example-preview-envs
+  source:
+    path: charts/sourced-db
+    repoURL: https://github.com/cloudnativeentrepreneur/sourced-db.git
+    targetRevision: HEAD
     helm:
       version: v3
   destination:
