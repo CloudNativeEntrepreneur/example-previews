@@ -1,28 +1,4 @@
 ---
-# Source: mychart/templates/preview-resources.yaml
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: environment-pr-1-preview-resources
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  project: example-preview-envs
-  source:
-    path: resources/preview
-    repoURL: https://github.com/cloudnativeentrepreneur/example-preview-envs.git
-    targetRevision: HEAD
-    helm:
-      version: v3
-  destination:
-    namespace: environment-pr-1-preview
-    server: https://kubernetes.default.svc
-  syncPolicy:
-    automated:
-      selfHeal: true
-      prune: true
----
 # Source: mychart/templates/preview.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
