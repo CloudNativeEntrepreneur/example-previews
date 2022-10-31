@@ -19,7 +19,7 @@ spec:
       version: v3
       values: |
         image:
-          tag: pr-62-e64bf98f4befe0ac10907abc602e1826e79e995e
+          tag: pr-62-5c3042e011d181d2327575f414db5e961513eb25
   destination:
     namespace: example-hasura-projections-service-pr-62-preview
     server: https://kubernetes.default.svc
@@ -34,7 +34,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: example-hasura-projections-service-pr-62-preview-environment
+  name: example-hasura-projections-service-pr-62-preview-env
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
