@@ -19,7 +19,7 @@ spec:
       version: v3
       values: |
         image:
-          tag: pr-58-09f3a802461532a6f75251c13e84aa5251f64f21
+          tag: pr-58-9d3b92b620954520a20fd7b899109c7f9eaf8528
   destination:
     namespace: example-hasura-projections-service-pr-58-preview
     server: https://kubernetes.default.svc
