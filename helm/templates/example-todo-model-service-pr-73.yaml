@@ -19,9 +19,10 @@ spec:
       version: v3
       values: |
         image:
-          tag: pr-73-975cc078951d29b5c9e173c17fa2f9e27a854de1
+          tag: pr-73-caa86ddc5019786cd9368ab0319a9e343959b312
         env:
-          EXAMPLE_HASURA_PROJECTIONS_URL: http://example-hasura-projections-service.example-prod-env.svc.cluster.local
+          ENABLE_SYNC_SEND_TO_DENORMALIZER: "false"
+          ENABLE_EVENT_PUBLISHING: "false"
   destination:
     namespace: example-todo-model-service-pr-73-preview
     server: https://kubernetes.default.svc
