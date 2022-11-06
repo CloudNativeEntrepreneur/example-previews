@@ -1,0 +1,84 @@
+---
+# Source: example-todo-model-service-preview/templates/app.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-todo-model-service-pr-68-preview-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: example-preview-envs
+  source:
+    path: helm
+    repoURL: https://github.com/cloudnativeentrepreneur/example-todo-model-service.git
+    targetRevision: renovate/axios-retry-3.x
+    helm:
+      version: v3
+      values: |
+        image:
+          tag: pr-68-2c0b26cdcb8f99f57348704cbae2afdb283aa57c
+        env:
+          EXAMPLE_HASURA_PROJECTIONS_URL: http://example-hasura-projections-service.example-prod-env.svc.cluster.local
+          TODO_EVENTS_BROKER_URL: "http://broker-ingress.knative-eventing.svc.cluster.local/example-prod-env/todo-events"
+  destination:
+    namespace: example-todo-model-service-pr-68-preview
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+---
+# Source: example-todo-model-service-preview/templates/environment.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-todo-model-service-pr-68-preview-environment
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: example-preview-envs
+  source:
+    path: helm
+    repoURL: https://github.com/cloudnativeentrepreneur/environment.git
+    targetRevision: v0.2.0
+    helm:
+      version: v3
+  destination:
+    namespace: example-todo-model-service-pr-68-preview
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+---
+# Source: example-todo-model-service-preview/templates/sourced-db.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-todo-model-service-pr-68-preview-sourced-db
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: example-preview-envs
+  source:
+    path: charts/sourced-db
+    repoURL: https://github.com/cloudnativeentrepreneur/sourced-db.git
+    targetRevision: HEAD
+    helm:
+      version: v3
+  destination:
+    namespace: example-todo-model-service-pr-68-preview
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
