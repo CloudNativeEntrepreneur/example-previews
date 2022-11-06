@@ -19,11 +19,10 @@ spec:
       version: v3
       values: |
         image:
-          tag: pr-73-5dffcb861d8fe3599b88d2cd2680cb58c9d974bd
+          tag: pr-73-e5242a88a2d94a0ca4f1b8089d04f8ebf7d56df8
         env:
           EXAMPLE_HASURA_PROJECTIONS_URL: http://example-hasura-projections-service.example-prod-env.svc.cluster.local
-          ENABLE_EVENT_PUBLISHING: "false"
-          TODO_EVENTS_BROKER_URL: http://broker-ingress.knative-eventing.svc.cluster.local/example-prod-env/todo-events
+          TODO_EVENTS_BROKER_URL: "http://broker-ingress.knative-eventing.svc.cluster.local/example-local-env/todo-events"
   destination:
     namespace: example-todo-model-service-pr-73-preview
     server: https://kubernetes.default.svc
