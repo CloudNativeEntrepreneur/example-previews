@@ -19,7 +19,7 @@ spec:
       version: v3
       values: |
         image:
-          tag: pr-73-044a998be276ee4de02c1f72d15f0c7acd42b86c
+          tag: pr-73-b661cf467d7cc518fb338fcc712c19017e725783
   destination:
     namespace: example-todo-model-service-pr-73-preview
     server: https://kubernetes.default.svc
