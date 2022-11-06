@@ -1,0 +1,55 @@
+---
+# Source: example-todo-model-service-preview/templates/app.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-hasura-pr-10-preview-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: example-preview-envs
+  source:
+    path: helm
+    repoURL: https://github.com/cloudnativeentrepreneur/example-hasura.git
+    targetRevision: feat/preview
+    helm:
+      version: v3
+      values: |
+        image:
+          tag: pr-10-cf8e7edd5bb3ab1abe4184ea64f52729ba4a23d1
+  destination:
+    namespace: example-hasura-pr-10-preview
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+---
+# Source: example-todo-model-service-preview/templates/environment.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-hasura-pr-10-preview-environment
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: example-preview-envs
+  source:
+    path: helm
+    repoURL: https://github.com/cloudnativeentrepreneur/environment.git
+    targetRevision: v0.2.0
+    helm:
+      version: v3
+  destination:
+    namespace: example-hasura-pr-10-preview
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
