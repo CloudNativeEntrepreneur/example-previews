@@ -1,0 +1,55 @@
+---
+# Source: mychart/templates/app.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-ui-pr-58-preview-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: example-preview-envs
+  source:
+    path: helm
+    repoURL: https://github.com/cloudnativeentrepreneur/sveltekit-web3auth-template.git
+    targetRevision: feat/preview-test
+    helm:
+      version: v3
+      values: |
+        image:
+          tag: pr-58-c7100e5c8ccdfb304e6165a3fbb9031ce27245d6
+        env:
+          DEBUG: sveltekit-web3auth:*
+  destination:
+    namespace: example-ui-pr-58-preview
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+---
+# Source: mychart/templates/environment.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-ui-pr-58-preview-environment
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: example-preview-envs
+  source:
+    path: helm
+    repoURL: https://github.com/cloudnativeentrepreneur/environment.git
+    targetRevision: v0.2.0
+    helm:
+      version: v3
+  destination:
+    namespace: example-ui-pr-58-preview
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
