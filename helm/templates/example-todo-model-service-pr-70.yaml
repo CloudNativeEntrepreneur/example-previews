@@ -19,7 +19,7 @@ spec:
       version: v3
       values: |
         image:
-          tag: pr-70-42b85e6fbe6d5f74f9961b7db07b38354f75c4e2
+          tag: pr-70-dde3eb8b7a13ee88c70ad42fdfc4ff52f18ba7dc
         env:
           EXAMPLE_HASURA_PROJECTIONS_URL: http://example-hasura-projections-service.example-prod-env.svc.cluster.local
           TODO_EVENTS_BROKER_URL: "http://broker-ingress.knative-eventing.svc.cluster.local/example-prod-env/todo-events"
