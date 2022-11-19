@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: environment-pr-2-preview
+  name: change-me-pr-2-preview
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -16,7 +16,7 @@ spec:
     helm:
       version: v3
   destination:
-    namespace: environment-pr-2-preview
+    namespace: change-me-pr-2-preview
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
