@@ -1,29 +1,5 @@
 ---
-# Source: sourced-db-preview/templates/environment.yaml
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: sourced-db-pr-4-preview-environment
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  project: example-preview-envs
-  source:
-    path: helm
-    repoURL: https://github.com/cloudnativeentrepreneur/environment.git
-    targetRevision: v0.4.0
-    helm:
-      version: v3
-  destination:
-    namespace: sourced-db-pr-4-preview
-    server: https://kubernetes.default.svc
-  syncPolicy:
-    automated:
-      selfHeal: true
-      prune: true
----
-# Source: sourced-db-preview/templates/preview.yaml
+# Source: sourced-db-preview/templates/application.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -48,3 +24,27 @@ spec:
       prune: true
     syncOptions:
       - CreateNamespace=true
+---
+# Source: sourced-db-preview/templates/environment.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sourced-db-pr-4-preview-environment
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: example-preview-envs
+  source:
+    path: helm
+    repoURL: https://github.com/cloudnativeentrepreneur/environment.git
+    targetRevision: v0.4.0
+    helm:
+      version: v3
+  destination:
+    namespace: sourced-db-pr-4-preview
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
