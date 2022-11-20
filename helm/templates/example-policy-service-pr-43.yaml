@@ -1,5 +1,5 @@
 ---
-# Source: web3auth-db-preview/templates/application.yaml
+# Source: example-policy-service-preview/templates/application.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -25,7 +25,7 @@ spec:
       selfHeal: true
       prune: true
 ---
-# Source: web3auth-db-preview/templates/environment.yaml
+# Source: example-policy-service-preview/templates/environment.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
