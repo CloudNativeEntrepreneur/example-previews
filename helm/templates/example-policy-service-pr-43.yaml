@@ -1,0 +1,50 @@
+---
+# Source: web3auth-db-preview/templates/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-policy-service-pr-43-preview-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: example-preview-envs
+  source:
+    path: helm
+    repoURL: https://github.com/CloudNativeEntrepreneur/example-policy-service.git
+    targetRevision: feat/gitops-2
+    helm:
+      version: v3
+  destination:
+    namespace: example-policy-service-pr-43-preview
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+---
+# Source: web3auth-db-preview/templates/environment.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-policy-service-pr-43-preview-environment
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: example-preview-envs
+  source:
+    path: helm
+    repoURL: https://github.com/cloudnativeentrepreneur/environment.git
+    targetRevision: v0.4.0
+    helm:
+      version: v3
+  destination:
+    namespace: example-policy-service-pr-43-preview
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
