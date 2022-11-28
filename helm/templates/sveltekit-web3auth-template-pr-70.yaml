@@ -17,7 +17,7 @@ spec:
       version: v3
       values: |
         image:
-          tag: pr-70-d0b9265df65014408db35bac73eee0f41fb50c20
+          tag: pr-70-d1e1870c8c2bcf068548bc6a98bf8815294a3ee0
   destination:
     namespace: sveltekit-web3auth-template-pr-70-preview
     server: https://kubernetes.default.svc
