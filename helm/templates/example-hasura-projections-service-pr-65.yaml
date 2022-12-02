@@ -1,5 +1,5 @@
 ---
-# Source: example-policy-service-preview/templates/app.yaml
+# Source: example-hasura-projections-service/templates/application.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -7,19 +7,17 @@ metadata:
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
 spec:
   project: example-preview-envs
   source:
     path: helm
-    repoURL: https://github.com/cloudnativeentrepreneur/example-hasura-projections-service.git
+    repoURL: https://github.com/CloudNativeEntrepreneur/example-hasura-projections-service.git
     targetRevision: renovate/eslint-8.x
     helm:
       version: v3
       values: |
         image:
-          tag: pr-65-235ff9ec58d559fcf2dc0bc6d3fce87b7796ef58
+          tag: pr-65-3530d930ab5cc5c4be541073e8c22976ccad6f05
   destination:
     namespace: example-hasura-projections-service-pr-65-preview
     server: https://kubernetes.default.svc
@@ -27,17 +25,17 @@ spec:
     automated:
       selfHeal: true
       prune: true
-    syncOptions:
-      - CreateNamespace=true
 ---
-# Source: example-policy-service-preview/templates/environment.yaml
+# Source: example-hasura-projections-service/templates/environment.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: example-hasura-projections-service-pr-65-preview-env
+  name: example-hasura-projections-service-pr-65-preview-environment
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   project: example-preview-envs
   source:
