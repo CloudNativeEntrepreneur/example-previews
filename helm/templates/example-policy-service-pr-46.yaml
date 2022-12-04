@@ -7,8 +7,6 @@ metadata:
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
 spec:
   project: example-preview-envs
   source:
@@ -17,6 +15,9 @@ spec:
     targetRevision: renovate/lint-staged-13.x
     helm:
       version: v3
+      values: |
+        image:
+          tag: pr-46-06378320d2c6cb1f35cdfc1c42ecbc98ddba6cde
   destination:
     namespace: example-policy-service-pr-46-preview
     server: https://kubernetes.default.svc
@@ -33,6 +34,8 @@ metadata:
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   project: example-preview-envs
   source:
