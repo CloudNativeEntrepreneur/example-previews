@@ -1,5 +1,5 @@
 ---
-# Source: example-dlq-service/templates/app.yaml
+# Source: example-dlq-service/templates/application.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -11,13 +11,13 @@ spec:
   project: example-preview-envs
   source:
     path: helm
-    repoURL: https://github.com/cloudnativeentrepreneur/example-dlq-service.git
+    repoURL: https://github.com/CloudNativeEntrepreneur/example-dlq-service.git
     targetRevision: renovate/prettier-2.x
     helm:
       version: v3
       values: |
         image:
-          tag: pr-60-84db08d3aac58d341901202ffabf81798e696648
+          tag: pr-60-7e9148e12251ea69ae9cdb5434f163134920620a
   destination:
     namespace: example-dlq-service-pr-60-preview
     server: https://kubernetes.default.svc
@@ -25,9 +25,6 @@ spec:
     automated:
       selfHeal: true
       prune: true
-      allowEmpty: true
-    syncOptions:
-      - CreateNamespace=true
 ---
 # Source: example-dlq-service/templates/environment.yaml
 apiVersion: argoproj.io/v1alpha1
@@ -37,12 +34,14 @@ metadata:
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   project: example-preview-envs
   source:
     path: helm
     repoURL: https://github.com/cloudnativeentrepreneur/environment.git
-    targetRevision: v0.2.0
+    targetRevision: v0.4.0
     helm:
       version: v3
   destination:
