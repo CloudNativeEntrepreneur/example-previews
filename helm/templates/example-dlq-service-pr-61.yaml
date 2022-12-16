@@ -1,5 +1,5 @@
 ---
-# Source: example-dlq-service/templates/app.yaml
+# Source: example-dlq-service/templates/application.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -11,13 +11,13 @@ spec:
   project: example-preview-envs
   source:
     path: helm
-    repoURL: https://github.com/cloudnativeentrepreneur/example-dlq-service.git
+    repoURL: https://github.com/CloudNativeEntrepreneur/example-dlq-service.git
     targetRevision: renovate/eslint-plugin-jest-27.x
     helm:
       version: v3
       values: |
         image:
-          tag: pr-61-24016d9c31223ff78177cb5792b0b86989d8a5d0
+          tag: pr-61-d8a1e64e1475cb1b9347ef2284cfa53d547b3feb
   destination:
     namespace: example-dlq-service-pr-61-preview
     server: https://kubernetes.default.svc
@@ -25,9 +25,6 @@ spec:
     automated:
       selfHeal: true
       prune: true
-      allowEmpty: true
-    syncOptions:
-      - CreateNamespace=true
 ---
 # Source: example-dlq-service/templates/environment.yaml
 apiVersion: argoproj.io/v1alpha1
@@ -37,12 +34,14 @@ metadata:
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   project: example-preview-envs
   source:
     path: helm
     repoURL: https://github.com/cloudnativeentrepreneur/environment.git
-    targetRevision: v0.2.0
+    targetRevision: v0.4.0
     helm:
       version: v3
   destination:
