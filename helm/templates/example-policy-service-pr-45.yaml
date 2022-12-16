@@ -7,8 +7,6 @@ metadata:
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
 spec:
   project: example-preview-envs
   source:
@@ -17,6 +15,9 @@ spec:
     targetRevision: renovate/eslint-plugin-jest-27.x
     helm:
       version: v3
+      values: |
+        image:
+          tag: pr-45-3ef981b454c68f06c559f25d13d4a7e9a09755dc
   destination:
     namespace: example-policy-service-pr-45-preview
     server: https://kubernetes.default.svc
@@ -33,6 +34,8 @@ metadata:
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   project: example-preview-envs
   source:
