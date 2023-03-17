@@ -1,9 +1,9 @@
 ---
-# Source: mychart/templates/app.yaml
+# Source: sveltekit-web3auth-template/templates/application.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: example-ui-pr-61-preview-app
+  name: sveltekit-web3auth-template-pr-61-preview-app
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -11,33 +11,31 @@ spec:
   project: example-preview-envs
   source:
     path: helm
-    repoURL: https://github.com/cloudnativeentrepreneur/sveltekit-web3auth-template.git
+    repoURL: https://github.com/CloudNativeEntrepreneur/sveltekit-web3auth-template.git
     targetRevision: renovate/node-17.x
     helm:
       version: v3
       values: |
         image:
-          tag: pr-61-74c6235722f0a4cf29ffefa5d338fd94b2624502
-        env:
-          DEBUG: sveltekit-web3auth:*
+          tag: pr-61-844b33eba276fee0d9d5e05d361b3be61335e6ae
   destination:
-    namespace: example-ui-pr-61-preview
+    namespace: sveltekit-web3auth-template-pr-61-preview
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
       selfHeal: true
       prune: true
-    syncOptions:
-      - CreateNamespace=true
 ---
-# Source: mychart/templates/environment.yaml
+# Source: sveltekit-web3auth-template/templates/environment.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: example-ui-pr-61-preview-environment
+  name: sveltekit-web3auth-template-pr-61-preview-environment
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   project: example-preview-envs
   source:
@@ -47,7 +45,7 @@ spec:
     helm:
       version: v3
   destination:
-    namespace: example-ui-pr-61-preview
+    namespace: sveltekit-web3auth-template-pr-61-preview
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
