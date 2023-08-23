@@ -17,7 +17,7 @@ spec:
       version: v3
       values: |
         image:
-          tag: pr-71-a9ee975f3d530592a3603de77a899ef797c035a9
+          tag: pr-71-91d951abf02a061b4da4ec9ce880912776ed9819
   destination:
     namespace: example-hasura-projections-service-pr-71-preview
     server: https://kubernetes.default.svc
