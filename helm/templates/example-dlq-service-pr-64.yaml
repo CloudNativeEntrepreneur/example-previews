@@ -17,7 +17,7 @@ spec:
       version: v3
       values: |
         image:
-          tag: pr-64-5e5359289bf67cb7ce04240d84822bd0163bae96
+          tag: pr-64-476e040cea97e976fb855a5cd7a0366ec4d39c77
   destination:
     namespace: example-dlq-service-pr-64-preview
     server: https://kubernetes.default.svc
