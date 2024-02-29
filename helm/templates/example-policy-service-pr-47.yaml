@@ -17,7 +17,7 @@ spec:
       version: v3
       values: |
         image:
-          tag: pr-47-2418eb46b5940bd4f8e0689bf86ba48036fcd7d5
+          tag: pr-47-e42c195eba8d78caa1b502df4a9f084f10d781af
   destination:
     namespace: example-policy-service-pr-47-preview
     server: https://kubernetes.default.svc
