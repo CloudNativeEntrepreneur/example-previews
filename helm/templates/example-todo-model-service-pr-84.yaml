@@ -17,7 +17,7 @@ spec:
       version: v3
       values: |
         image:
-          tag: pr-84-6d7ab8a116b444d4332763789e076053a9e96610
+          tag: pr-84-22ab874809b02fad9fcbd5d456029d42664bb830
   destination:
     namespace: example-todo-model-service-pr-84-preview
     server: https://kubernetes.default.svc
