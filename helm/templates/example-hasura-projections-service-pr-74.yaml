@@ -1,0 +1,53 @@
+---
+# Source: example-hasura-projections-service/templates/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-hasura-projections-service-pr-74-preview-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: example-preview-envs
+  source:
+    path: helm
+    repoURL: https://github.com/CloudNativeEntrepreneur/example-hasura-projections-service.git
+    targetRevision: renovate/npm-express-vulnerability
+    helm:
+      version: v3
+      values: |
+        image:
+          tag: pr-74-048b0b6afa1bb3d613789d36a237305762223fed
+  destination:
+    namespace: example-hasura-projections-service-pr-74-preview
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+---
+# Source: example-hasura-projections-service/templates/environment.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-hasura-projections-service-pr-74-preview-environment
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  project: example-preview-envs
+  source:
+    path: helm
+    repoURL: https://github.com/cloudnativeentrepreneur/environment.git
+    targetRevision: v0.4.0
+    helm:
+      version: v3
+  destination:
+    namespace: example-hasura-projections-service-pr-74-preview
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
