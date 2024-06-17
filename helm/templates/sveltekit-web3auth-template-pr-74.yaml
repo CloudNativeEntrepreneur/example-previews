@@ -1,0 +1,53 @@
+---
+# Source: sveltekit-web3auth-template/templates/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sveltekit-web3auth-template-pr-74-preview-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: example-preview-envs
+  source:
+    path: helm
+    repoURL: https://github.com/CloudNativeEntrepreneur/sveltekit-web3auth-template.git
+    targetRevision: renovate/npm-ws-vulnerability
+    helm:
+      version: v3
+      values: |
+        image:
+          tag: pr-74-da8196bea4ba92796edb5da77e4cf39627597529
+  destination:
+    namespace: sveltekit-web3auth-template-pr-74-preview
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+---
+# Source: sveltekit-web3auth-template/templates/environment.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sveltekit-web3auth-template-pr-74-preview-environment
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  project: example-preview-envs
+  source:
+    path: helm
+    repoURL: https://github.com/cloudnativeentrepreneur/environment.git
+    targetRevision: v0.4.0
+    helm:
+      version: v3
+  destination:
+    namespace: sveltekit-web3auth-template-pr-74-preview
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
