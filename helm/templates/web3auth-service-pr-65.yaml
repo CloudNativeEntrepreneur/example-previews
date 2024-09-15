@@ -17,7 +17,7 @@ spec:
       version: v3
       values: |
         image:
-          tag: pr-65-96952e8610a4ee5357b284759dedf7a4ca61c698
+          tag: pr-65-2cf305fa5c95e8be7d5cae65384bae8d3cae0aaa
   destination:
     namespace: web3auth-service-pr-65-preview
     server: https://kubernetes.default.svc
