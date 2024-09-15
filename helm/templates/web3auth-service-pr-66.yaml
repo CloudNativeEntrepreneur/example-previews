@@ -1,0 +1,53 @@
+---
+# Source: web3auth-service/templates/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: web3auth-service-pr-66-preview-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: example-preview-envs
+  source:
+    path: helm
+    repoURL: https://github.com/CloudNativeEntrepreneur/web3auth-service.git
+    targetRevision: renovate/npm-body-parser-vulnerability
+    helm:
+      version: v3
+      values: |
+        image:
+          tag: pr-66-2b8e01d702f428388020ce50707e5eca743a6979
+  destination:
+    namespace: web3auth-service-pr-66-preview
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+---
+# Source: web3auth-service/templates/environment.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: web3auth-service-pr-66-preview-environment
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  project: example-preview-envs
+  source:
+    path: helm
+    repoURL: https://github.com/cloudnativeentrepreneur/environment.git
+    targetRevision: v0.4.0
+    helm:
+      version: v3
+  destination:
+    namespace: web3auth-service-pr-66-preview
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
