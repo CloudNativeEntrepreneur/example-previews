@@ -12,7 +12,7 @@ spec:
   source:
     path: helm
     repoURL: https://github.com/CloudNativeEntrepreneur/web3auth-db.git
-    targetRevision: renovate/https-github.com-cloudnativeentrepreneur-environment.git-0.x
+    targetRevision: v0.6.1
     helm:
       version: v3
   destination:
